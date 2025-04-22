@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech News | Tech Multiplex</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #2e2e42;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2e2e42;
+      margin-top: 30px;
+    }
+
+    .news-grid {
+      max-width: 1200px;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .news-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: 0.3s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .news-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .news-card-content {
+      padding: 15px;
+    }
+
+    .news-card h3 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #222;
+    }
+
+    .news-card p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .news-card a {
+      text-decoration: none;
+      color: #0077cc;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    footer {
+      background-color: #1e1e2f;
+      color: #aaa;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tech Multiplex - Real-Time Tech News</h1>
+    <p>Latest technology updates from around the world</p>
+  </header>
+
+  <h2>Latest Tech Headlines</h2>
+
+  <section class="news-grid" id="news-container">
+    <!-- News articles will appear here via JS -->
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Tech Multiplex. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const apiKey = 'ae62dcb4d7754ef4ad3ed030bd06e721'; // <-- Replace with your NewsAPI key
+    const apiUrl = `https://newsapi.org/v2/top-headlines?category=technology&language=en&pageSize=8&apiKey=${apiKey}`;
+
+    async function fetchNews() {
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        const container = document.getElementById('news-container');
+        container.innerHTML = ''; // clear old content
+
+        data.articles.forEach(article => {
+          const card = document.createElement('div');
+          card.className = 'news-card';
+          card.innerHTML = `
+            <img src="${article.urlToImage || 'https://via.placeholder.com/400x200?text=No+Image'}" alt="News">
+            <div class="news-card-content">
+              <h3>${article.title}</h3>
+              <p>${article.description || 'No description available'}</p>
+              <a href="${article.url}" target="_blank">Read More</a>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (error) {
+        console.error("Error fetching news:", error);
+        document.getElementById('news-container').innerHTML = '<p style="text-align:center;color:red;">Failed to load news.</p>';
+      }
+    }
+
+    fetchNews();
+  </script>
+
+</body>
+</html>

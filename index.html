@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech Multiplex</title>
+  <style>
+    html {    
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffffff, #e0f5e9);
+      color: #4c4b4b;
+    }
+
+    header {
+      text-align: center;
+    }
+
+    .logo-container {
+      width: 100%;
+      background-image: url('images 1.png');
+      background-size: cover;
+      background-position: center;
+      padding: 40px 0;
+      color: #fff;
+    }
+
+    .logo-container img {
+      height: 80px;
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 10px;
+      background-color: rgba(0,0,0,0.3);
+    }
+
+    nav {
+      background: #2e2e42;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+      position: relative;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    nav a#contact:hover::after {
+      content: 'My Number: 0703643194';
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #444;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+
+    .hero {
+      padding: 60px 20px;
+      text-align: center;
+      background: linear-gradient(to right, #39424e, #205054);
+      color: white;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      background: #1e1e2f;
+      color: #aaa;
+      padding: 20px;
+    }
+
+    .support-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #5f9843;
+      border-radius: 50%;
+      padding: 15px;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      cursor: pointer;
+    }
+
+    .support-icon:hover {
+      background-color: #aea25d;
+    }
+
+    .comments-section {
+      margin-top: 40px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .comments-section textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    .comments-section button {
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .comments-section button:hover {
+      background-color: #66bb6a;
+    }
+
+    /* Our Service Section */
+    .services-section {
+      padding: 40px 20px;
+      text-align: center;
+      background-color: #f8f8f8;
+    }
+
+    .services-section h2 {
+      margin-bottom: 30px;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .service-box {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .service-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-box img {
+      width: 100%;
+      max-height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .service-box p {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    /* Animation */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .animate-on-scroll.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Latest Articles Section */
+    .latest-articles {
+      margin-top: 30px;
+      padding: 40px 20px;
+      text-align: center;
+      background-image: url('tech-collage.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .latest-articles .content-box {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .latest-articles h3 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .latest-articles p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .welcome-section {
+      padding: 40px 20px;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    .welcome-section h2 {
+      margin-bottom: 20px;
+    }
+
+    .welcome-section p {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .logo-container h1 {
+        font-size: 24px;
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .content {
+        padding: 15px;
+      }
+
+      nav {
+        flex-direction: column;
+      }
+
+      nav a {
+        margin: 10px 0;
+      }
+
+      footer {
+        font-size: 12px;
+      }
+
+      .support-icon {
+        padding: 12px;
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-container h1 {
+        font-size: 20px;
+      }
+
+      .support-icon {
+        padding: 10px;
+        font-size: 18px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="logo 2.png" alt="Tech Multiplex Logo">
+      <h1>Tech Multiplex</h1>
+      <p>Your Hub for All Things Tech</p>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#services">Category</a>
+    <a href="news.html" target="_blank">News</a>
+    <a href="reviews.html" target="_blank">Reviews</a>
+    <a href="tutorials.html" target="_blank">Tutorials</a>
+    <a href="#contact" id="contact" >Contact</a>
+  </nav>
+
+  <section class="hero" id="home">
+    <p>Stay updated with the latest tech trends, reviews, and tutorials!</p>
+  </section>
+
+  <section class="welcome-section" id="welcome">
+    <h2>Welcome to Tech Multiplex</h2>
+    <p>At Tech Multiplex, we bring you the most comprehensive and up-to-date articles that dive deep into the world of technology...</p>
+  </section>
+
+  <section class="latest-articles" id="latest-articles">
+    <div class="content-box">
+      <h3>Latest Articles</h3>
+      <p>Discover the newest trends and expert insights in the world of tech...</p>
+    </div>
+  </section>
+
+  <!-- Our Services -->
+  <section class="services-section animate-on-scroll" id="services">
+    <h2>Our Service</h2>
+    <div class="service-grid">
+      <div class="service-box">
+        <img src="phone.jpg" alt="Phone Accessories">
+        <p>Phone Accessories</p>
+      </div>
+      <div class="service-box">
+        <img src="electric.jpg" alt="Electric Items">
+        <p>Electric Items</p>
+      </div>
+      <div class="service-box">
+        <img src="toy.jpg" alt="Toys">
+        <p>Toys</p>
+      </div>
+      <div class="service-box">
+        <img src="computer.jpg" alt="Computer Parts">
+        <p>Computer Parts</p>
+      </div>
+      <div class="service-box">
+        <img src="film.jpg" alt="Films">
+        <p>Films</p>
+      </div>
+      <div class="service-box">
+        <img src="game.jpg" alt="Games">
+        <p>Games</p>
+      </div>
+      <div class="service-box">
+        <img src="song.jpg" alt="Songs">
+        <p>Songs</p>
+      </div>
+      <div class="service-box">
+        <img src="software.jpg" alt="Software">
+        <p>Software</p>
+      </div>
+      <div class="service-box">
+        <img src="hardware.jpg" alt="Hardware">
+        <p>Hardware</p>
+      </div>
+      <div class="service-box">
+        <img src="tools.jpg" alt="Tools">
+        <p>Tools</p>
+      </div>
+      <div class="service-box">
+        <img src="gadget.jpg" alt="Gadgets">
+        <p>Gadgets</p>
+      </div>
+      <div class="service-box">
+        <img src="other.jpg" alt="Other">
+        <p>Other</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="comments-section">
+    <h3>Comment</h3>
+    <textarea rows="4" placeholder="Share your thoughts..."></textarea>
+    <br>
+    <button onclick="thankYouMessage()">Submit Comment</button>
+  </section>
+
+  <div class="support-icon" title="Call Us Now!" onclick="window.location.href='tel:+94712345678';">
+    📞
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Tech Multiplex. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function thankYouMessage() {
+      alert('Thank you for your support!');
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    const animatedItems = document.querySelectorAll('.animate-on-scroll');
+    animatedItems.forEach(item => {
+      observer.observe(item);
+    });
+  </script>
+
+</body>
+</html>

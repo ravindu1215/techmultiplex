@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tutorials - Tech Multiplex</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: #263238;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .video-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .video-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .video-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .video-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .video-title {
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #2e2e42;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      background: #263238;
+      color: white;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Tech Multiplex Tutorials</h1>
+    <p>Learn with Us — Step-by-Step Guides & Tutorials</p>
+  </header>
+
+  <section class="video-section" id="tutorials"></section>
+
+  <footer>
+    &copy; 2025 Tech Multiplex. All rights reserved.
+  </footer>
+
+  <script>
+    const tutorials = [
+      {
+        id: "LVIRUdJssxg",
+        title: "How to Convert PDF to Word (Sinhala Tutorial)"
+      },
+      {
+        id: "BdcPLKwWyvA",
+        title: "How to Use Canva AI Image Generator"
+      },
+      {
+        id: "1wpFKZbMRqw",
+        title: "Create Fiverr Gig Like a Pro (Sinhala)"
+      }
+    ];
+
+    const tutorialsContainer = document.getElementById("tutorials");
+
+    tutorials.forEach(video => {
+      const videoCard = document.createElement("div");
+      videoCard.className = "video-card";
+      videoCard.innerHTML = `
+        <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank">
+          <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" />
+          <div class="video-title">${video.title}</div>
+        </a>
+      `;
+      tutorialsContainer.appendChild(videoCard);
+    });
+  </script>
+
+</body>
+</html>

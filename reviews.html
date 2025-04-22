@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tech Multiplex - Reviews</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f8ff;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px;
+      background-color: #2c3e50;
+      color: white;
+      margin: 0;
+    }
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 30px;
+    }
+    .video-box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .video-box iframe {
+      width: 100%;
+      height: 180px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .video-box h3 {
+      font-size: 16px;
+      color: #333;
+      margin: 0;
+    }
+    .video-box .thumbnail {
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔍 Tech Multiplex - Latest Reviews</h1>
+
+  <div class="video-container" id="videoContainer">
+    <!-- Dynamic Videos will load here -->
+  </div>
+
+  <script>
+    // Your YouTube video links (Add or update links here)
+    const videoLinks = [
+      "https://youtu.be/LVIRUdJssxg?si=w053xmRvU03yzi8i",
+      "https://youtu.be/BdcPLKwWyvA?si=ssYRjvlvYv7KLIn5",
+      "https://youtu.be/1wpFKZbMRqw?si=2sC3mvVBFg0LQZjE"
+    ];
+
+    const container = document.getElementById('videoContainer');
+
+    // Function to load a new video with its thumbnail and iframe
+    function loadVideo(link) {
+      fetch(`https://www.youtube.com/oembed?url=${link}&format=json`)
+        .then(response => response.json())
+        .then(data => {
+          const videoId = new URL(link).searchParams.get("v");
+          const box = document.createElement('div');
+          box.className = "video-box";
+
+          // Create a clickable thumbnail image
+          const thumbnail = document.createElement('img');
+          thumbnail.src = data.thumbnail_url;
+          thumbnail.alt = `Thumbnail for ${data.title}`;
+          thumbnail.className = "thumbnail";
+          thumbnail.onclick = () => {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+            box.appendChild(iframe);
+            thumbnail.style.display = 'none'; // Hide the thumbnail after clicking
+          };
+
+          // Video Title
+          const title = document.createElement('h3');
+          title.textContent = data.title;
+
+          box.appendChild(thumbnail);
+          box.appendChild(title);
+          container.appendChild(box);
+        })
+        .catch(error => {
+          console.error("Error loading video data:", error);
+        });
+    }
+
+    // Load each video in the array
+    videoLinks.forEach(link => {
+      loadVideo(link);
+    });
+
+  </script>
+
+</body>
+</html>
